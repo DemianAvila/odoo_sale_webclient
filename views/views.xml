@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="sale-webclient.list">
+      <field name="name">sale-webclient list</field>
+      <field name="model">sale-webclient.sale-webclient</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="sale-webclient.action_window">
+      <field name="name">sale-webclient window</field>
+      <field name="res_model">sale-webclient.sale-webclient</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="sale-webclient.action_server">
+      <field name="name">sale-webclient server</field>
+      <field name="model_id" ref="model_sale-webclient_sale-webclient"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="sale-webclient" id="sale-webclient.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="sale-webclient.menu_1" parent="sale-webclient.menu_root"/>
+    <menuitem name="Menu 2" id="sale-webclient.menu_2" parent="sale-webclient.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="sale-webclient.menu_1_list" parent="sale-webclient.menu_1"
+              action="sale-webclient.action_window"/>
+    <menuitem name="Server to list" id="sale-webclient" parent="sale-webclient.menu_2"
+              action="sale-webclient.action_server"/>
+-->
+  </data>
+</odoo>
