@@ -1,0 +1,38 @@
+
+Here's a .gitignore configuration that ignores common Python project clutter:
+
+# Compiled Python files
+__pycache__/
+
+# Distribution / packaging
+dist/
+build/
+develop-eggs/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE and virtualenv settings
+.idea/
+.vscode/
+.venv/
+
+# Unit test / coverage reports
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# IDE stuff (adjust based on your IDE)
+*.pydevproject
+*.project
+
+# Sphinx documentation
+docs/_build/
