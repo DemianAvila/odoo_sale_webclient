@@ -17,7 +17,6 @@ class SaleWebclientController(http.Controller):
     def compare_processed(self, pattern, name):
         return re.search(pattern, name)
 
-
     @http.route(route='/sale-webclient/clients', 
                 auth= 'public',
                 type= 'http',
@@ -76,3 +75,6 @@ class SaleWebclientController(http.Controller):
             "products": product_list
         }) 
 
+    @http.route('/sale-webclient/sales', auth='public', website=True)
+    def list_sales(self, **kw):
+        return http.request.render('sale-webclient.sales-list')

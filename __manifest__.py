@@ -14,7 +14,16 @@ Habilitates a CRUD for the platform user to access the sale model
     'category': 'Sales',
     'version': '0.1',
 
-    'depends': ['base', 'web', 'sale_management'],
+    'depends': [
+        'base', 
+        'web', 
+        'sale_management',
+        'website'
+    ],
+
+    'data': [
+        'views/templates.xml',
+    ],
 
 }
 
