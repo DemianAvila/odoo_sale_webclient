@@ -22,7 +22,10 @@ class SaleWebclientController(http.Controller):
                 auth= 'public',
                 type= 'http',
                 methods= ['get'])
-    def index(self, namesearch=".*", maxqueries=5, **kw):
+    def get_clients(self, 
+              namesearch=".*", 
+              maxqueries=5, 
+              **kw):
         if namesearch!=".*":
             namesearch = f".*{namesearch.lower()}.*"
         clients = request.env["res.partner"].search([])
@@ -39,10 +42,37 @@ class SaleWebclientController(http.Controller):
                 query_count += 1
             if query_count==maxqueries:
                 break
-                
             
         return json.dumps({
             "clients": client_list
         }) 
 
+    @http.route(route='/sale-webclient/products', 
+                auth= 'public',
+                type= 'http',
+                methods= ['get'])
+    def get_products(self, 
+              namesearch=".*", 
+              maxqueries=5, 
+              **kw):
+        if namesearch!=".*":
+            namesearch = f".*{namesearch.lower()}.*"
+        products = request.env["product.template"].search([])
+        product_list = []
+        query_count = 0
+        for product in products:
+            processed = self.process_names(product.name)
+            if self.compare_processed(namesearch, processed):
+                product_list.append({
+                    "id": product.id,
+                    "name": product.name,
+                    "processed": processed
+                })
+                query_count += 1
+            if query_count==maxqueries:
+                break
+                
+        return json.dumps({
+            "products": product_list
+        }) 
 
