@@ -76,9 +76,11 @@ class SaleWebclientController(http.Controller):
             "products": product_list
         }) 
 
-    @http.route('/sale-webclient/sales-list', auth='public', website=True)
+    @http.route('/sale-webclient/sales-list', 
+                auth='public', 
+                website=True)
     def list_sales(self, **kw):
-        return http.request.render('sale-webclient.SaleList')
+        return http.request.render('sale-webclient.SaleListTemplate')
 
     @http.route(route='/sale-webclient/sales', 
                 auth= 'public',
@@ -105,10 +107,6 @@ class SaleWebclientController(http.Controller):
                 string_fields[key] = f".*{string_fields[key].lower()}.*"
         for key in date_fields.keys():
             if date_fields[key]!=".*":
-                logging.info("===================")
-                logging.info(key)
-                logging.info(date_fields[key])
-                logging.info("===================")
                 try:
                     date_fields[key] = datetime.datetime.fromisoformat(date_fields[key])
                 except:
@@ -149,5 +147,12 @@ class SaleWebclientController(http.Controller):
         return json.dumps({
             "sales": sale_list
         }) 
+
+    @http.route('/sale-webclient/edit-sale', 
+                auth='public', 
+                website=True)
+    def edit_sale(self, **kw):
+        return http.request.render('sale-webclient.EditSaleTemplate')
+
 
 

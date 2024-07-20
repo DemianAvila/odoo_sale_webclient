@@ -1,0 +1,9 @@
+<odoo>
+  <data>
+    <template id="EditSaleTemplate" >
+      <t t-call="website.layout">
+        <owl-component name="sale-webclient.EditSaleComponent" />
+      </t>
+    </template>
+  </data>
+</odoo>

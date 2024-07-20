@@ -1,6 +1,6 @@
 <odoo>
   <data>
-    <template id="SaleList" >
+    <template id="SaleListTemplate" >
       <t t-call="website.layout">
         <owl-component name="sale-webclient.SaleListComponent" />
       </t>

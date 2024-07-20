@@ -8,7 +8,7 @@ class SaleListController {
     this.url = window.location.host
     this.api_route_sale_list = "/sale-webclient/sales"
     this.protocol = window.location.protocol
-    this.api_route_edit_sale="/sale-webclient/edit_sale"
+    this.api_route_edit_sale="/sale-webclient/edit-sale"
   }
 
   getURL(){

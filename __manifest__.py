@@ -17,10 +17,12 @@ Habilitates a CRUD for the platform user to access the sale model
     ],
     'data': [
         'views/sale-list-template.xml',
+        'views/edit-sale-template.xml',
     ],
     'assets': {
         'web.assets_frontend': [
             'sale-webclient/static/src/salelist-component/**/*',
+            'sale-webclient/static/src/editsale-component/**/*',
         ],
     },
 }
