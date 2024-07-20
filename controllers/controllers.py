@@ -77,4 +77,4 @@ class SaleWebclientController(http.Controller):
 
     @http.route('/sale-webclient/sales', auth='public', website=True)
     def list_sales(self, **kw):
-        return http.request.render('sale-webclient.sales-list')
+        return http.request.render('sale-webclient.SaleList')

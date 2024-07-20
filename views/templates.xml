@@ -1,9 +1,0 @@
-<odoo>
-  <data>
-    <template id="sales-list">
-      <t t-call="website.layout">
-        <h1>My Odoo View</h1>
-      </t>
-    </template>
-  </data>
-</odoo>

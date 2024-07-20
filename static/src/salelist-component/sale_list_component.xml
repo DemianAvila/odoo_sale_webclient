@@ -1,0 +1,12 @@
+<odoo>
+  <data>
+    <template xml:space="preserve">
+      <t t-name="sale-webclient.SaleListComponent">
+        <h2>component</h2>
+        <div t-on-click="increment">
+          <t t-esc="state.value"/>
+        </div>
+      </t>
+    </template>
+  </data>
+</odoo>

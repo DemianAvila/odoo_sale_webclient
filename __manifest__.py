@@ -20,10 +20,13 @@ Habilitates a CRUD for the platform user to access the sale model
         'sale_management',
         'website'
     ],
-
+    'assets': {
+        'web.assets_frontend': [
+            'sale-webclient/static/src/salelist-component/**/*',
+        ],
+    },
     'data': [
-        'views/templates.xml',
+        'views/sale-list-template.xml',
     ],
-
 }
 
