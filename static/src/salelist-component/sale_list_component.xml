@@ -2,7 +2,16 @@
 <template xml:space="preserve">
   <t t-name="sale-webclient.SaleListComponent" owl="1">
     <div class="container" style="height: 100%; width: 100%; display: flex; flex-direction: column;" >
-      <h1>Hello</h1>
+      <h1>Quotations</h1>
+      <div>
+        <button class="btn btn-primary rounded">Create +</button>
+      </div>
+      <div>
+        <input type="text" />
+        <button>
+          <i class="oi oi-fw oi-search"></i>
+        </button>
+      </div>
     </div>
   </t>
 </template>
