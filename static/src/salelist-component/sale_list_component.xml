@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <template xml:space="preserve">
   <t t-name="sale-webclient.SaleListComponent" owl="1">
+    <div class="container" style="height: 100%; width: 100%; display: flex; flex-direction: column;" >
+      <h1>Hello</h1>
+    </div>
   </t>
 </template>
