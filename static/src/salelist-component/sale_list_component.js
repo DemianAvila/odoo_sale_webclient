@@ -1,6 +1,7 @@
 /** @odoo-module */
-import { Component } from "@odoo/owl";
+import { Component, useState } from "@odoo/owl";
 import { registry } from "@web/core/registry"
+
 
 class SaleListComponent extends Component {
     static template = 'sale-webclient.SaleListComponent';

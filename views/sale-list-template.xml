@@ -2,9 +2,7 @@
   <data>
     <template id="SaleList" >
       <t t-call="website.layout">
-        <div>Hello</div>        
         <owl-component name="sale-webclient.SaleListComponent" />
-        <h1>after component</h1>
       </t>
     </template>
   </data>
