@@ -154,5 +154,36 @@ class SaleWebclientController(http.Controller):
     def edit_sale(self, **kw):
         return http.request.render('sale-webclient.EditSaleTemplate')
 
+    @http.route(route='/sale-webclient/sale', 
+                auth= 'public',
+                type= 'http',
+                methods= ['get', 'patch'])
+    def get_sale_by_id(self, 
+                       id=None, 
+                       **kw):
+        method = request.httprequest.method
 
+        if method == "GET":
+            if not id:
+                return json.dumps({"error": "Sale id doesn't exists"})
+            sale = request.env["sale.order"].search([
+                ("name", "=", id)
+            ])
+            if len(sale)!=1:
+                return json.dumps({"error": "Sale id doesn't exists"})
+            sale_lines=[]
+            sale = sale[0]
+            for line in sale.order_line:
+                sale_lines.append({
+                    "product": line.product_template_id.name,
+                    "quantity": line.product_uom_qty,
+                    "unit_price": line.price_unit
+                })
 
+            return json.dumps({
+                "id": sale.id,
+                "name": sale.name,
+                "customer_name": sale.partner_id.name,
+                "order_date": sale.date_order.strftime("%d/%m/%y %H:%M:%S"),
+                "products": sale_lines
+            })
