@@ -64,6 +64,8 @@ class SaleListController {
     divColumnList.appendChild(placedAt);
     this.getListNode().appendChild(divColumnList);
   }
+
+ 
 }
 
 class SaleListComponent extends Component {

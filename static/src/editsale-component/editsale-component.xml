@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <template xml:space="preserve">
   <t t-name="sale-webclient.EditSaleComponent" owl="1">
-    <h1>hello fucker</h1>
+    <div class="container" style="height: 60vh; width: 90vw%; display: flex; flex-direction: column;" >
+      <div style="background-color:#080808; color: white; height: 10em; padding: 20px; display: flex">
+        <h1 id="title" ></h1>
+      </div>
+      <div id="client" style="display: flex; flex-direction: row">
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <h2>Products</h2>
+        <div style="display: flex; flex-direction: row">
+          <p>Seacrh product</p>
+          <input type="text" />
+        </div>
+        <table id="data">
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <button class="btn btn-primary rounded">Submit ➩</button>
+      </div>
+    </div>
   </t>
 </template>
