@@ -80,9 +80,12 @@ class EditSaleController{
       let dataPrice = null;
       let dataAction = null;
       let button = null;
+      let elementID = null
 
-      productList.forEach(element => {
+      productList.forEach((element, index) => {
         tableRow = document.createElement("tr");
+        elementID = `prod_${index}`
+        tableRow.setAttribute("id", elementID)
         dataProduct = document.createElement("td");
         dataProduct.textContent = element.product;
         dataQty = document.createElement("td");
@@ -91,7 +94,8 @@ class EditSaleController{
         dataPrice.textContent = element.unit_price;
         dataAction = document.createElement("td");
         button = document.createElement("button");
-        button.textContent = "X"
+        button.textContent = "X";
+        button.setAttribute("onclick", `document.getElementById('${elementID}').remove()`)
         dataAction.appendChild(button);
         tableRow.appendChild(dataProduct);
         tableRow.appendChild(dataQty);
@@ -103,7 +107,6 @@ class EditSaleController{
 
     async getSaleFromAPI() {
         let url = `${this.protocol}//${this.getURL()}${this.getAPIRouteSale()}?id=${this.getSaleID()}`
-        console.log(url) 
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -128,8 +131,6 @@ class EditSaleComponent extends Component {
         });
         this.editController = new EditSaleController();
         this.edit_data = await this.editController.getSaleFromAPI()
-        console.log(this.editController.getSaleID())
-        console.log(this.edit_data)
         this.editController.insertTitle(this.edit_data.name)
         this.editController.insertClientAndDate(this.edit_data.customer_name, this.edit_data.order_date)
         this.editController.insertProducts(this.edit_data.products)
