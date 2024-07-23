@@ -10,8 +10,17 @@
       <div style="display: flex; flex-direction: column">
         <h2>Products</h2>
         <div style="display: flex; flex-direction: row">
-          <p>Seacrh product</p>
-          <input type="text" />
+          <p style="width: 20%">Seacrh product:</p>
+          <div style="width: 40%; display: flex; flex-direction: row" >
+            <input style="width: 90%" type="text" t-on-input="_search" id="search-bar" />
+            <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            </button>
+            <ul class="dropdown-menu" id="search-prod">
+              <!--<li><a class="dropdown-item" href="#">Something else here</a></li>-->
+            </ul>
+          </div>
+          </div>
         </div>
         <table id="data" style="margin-top=2em; margin-bottom=2em">
           <tr>

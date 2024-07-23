@@ -14,6 +14,7 @@ class EditSaleController{
         this.url = window.location.host
         this.api_route_sale_get = "/sale-webclient/sale"
         this.protocol = window.location.protocol
+        this.api_route_product_get = "/sale-webclient/products"
     }
 
     getURL() {
@@ -50,6 +51,10 @@ class EditSaleController{
     getClientNode(){
       let client_node = document.getElementById("client")
       return client_node
+    }
+
+    getAPIRouteProduct(){
+      return this.api_route_product_get
     }
 
     insertClientAndDate(client, date){
@@ -128,6 +133,21 @@ class EditSaleController{
       });
     }
 
+    async getProductFromAPI(name) {
+        let url = `${this.protocol}//${this.getURL()}${this.getAPIRouteProduct()}?namesearch=${name}`
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return null;
+        }
+    }
+
     async getSaleFromAPI() {
         let url = `${this.protocol}//${this.getURL()}${this.getAPIRouteSale()}?id=${this.getSaleID()}`
         try {
@@ -141,6 +161,29 @@ class EditSaleController{
             console.error('Error fetching data:', error);
             return null;
         }
+    }
+    
+    getDropdownMenu(){
+      return document.getElementById("search-prod")
+    }
+
+    getSearchBar(){
+      return document.getElementById("search-bar")
+    }
+
+    dropSearchItems(){
+      this.getDropdownMenu().innerHTML=""
+    }
+
+    addSearchItem(prodItem){
+      let dropdown = this.getDropdownMenu();
+      let list_element = document.createElement("li");
+      let link = document.createElement("a");
+      link.textContent = prodItem.name
+      link.setAttribute("class", "dropdown-item")
+      link.setAttribute("onclick", `document.getElementById('search-bar').value = '${prodItem.name}'`)
+      list_element.appendChild(link)
+      dropdown.appendChild(list_element)
     }
 }
 
@@ -158,9 +201,15 @@ class EditSaleComponent extends Component {
         this.editController.insertClientAndDate(this.edit_data.customer_name, this.edit_data.order_date)
         this.editController.insertProducts(this.edit_data.products)
     }
-
-    increment() {
-        this.state.value++;
+    
+    _search(event){
+      (async()=>{
+        let data = await this.editController.getProductFromAPI(event.target.value);
+        this.editController.dropSearchItems()
+        data.products.forEach(element => {
+          this.editController.addSearchItem(element)
+        });
+      })()
     }
 }
 
