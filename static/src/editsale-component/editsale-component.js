@@ -55,13 +55,12 @@ class EditSaleController{
     insertClientAndDate(client, date){
       const divClient = document.createElement('div'); 
       divClient.setAttribute("style", "width: 50%")
-      const searchClient = document.createElement('input');
-      searchClient.setAttribute("type", "text");
-      searchClient.value = client;
+      const searchClient = document.createElement('p');
+      searchClient.textContent = `Client: ${client}`;
       const divDate = document.createElement('div');
       divDate.setAttribute("style", "width: 50%")
       const dateParragraph = document.createElement('p')
-      dateParragraph.textContent = date;
+      dateParragraph.textContent = `Order date: ${date}`;
       divDate.appendChild(dateParragraph);
       const clientNode = this.getClientNode();
       clientNode.appendChild(divClient);
@@ -73,6 +72,13 @@ class EditSaleController{
       return document.getElementById("data");
     }
 
+    getSubtotal(element, qty, price){
+      return `(()=>{
+        let sub = document.getElementById(${element});
+        sub.textContent = ${qty}*${price}
+      })()`
+    }
+
     insertProducts(productList){
       let tableRow = null;
       let dataProduct = null;
@@ -80,18 +86,34 @@ class EditSaleController{
       let dataPrice = null;
       let dataAction = null;
       let button = null;
-      let elementID = null
+      let elementID = null;
+      let qtyInput = null;
+      let priceInput = null;
+      let dataSubtotal = null;
+      let subtotal = null;
+      let subtotalID = null;
 
       productList.forEach((element, index) => {
         tableRow = document.createElement("tr");
         elementID = `prod_${index}`
+        subtotalID = `subtotal_${index}`
         tableRow.setAttribute("id", elementID)
         dataProduct = document.createElement("td");
         dataProduct.textContent = element.product;
         dataQty = document.createElement("td");
-        dataQty.textContent = element.quantity;
+        qtyInput = document.createElement("input");
+        qtyInput.value = element.quantity
+        dataQty.appendChild(qtyInput);
         dataPrice = document.createElement("td");
-        dataPrice.textContent = element.unit_price;
+        priceInput = document.createElement("input");
+        priceInput.value = element.unit_price
+        dataPrice.appendChild(priceInput);
+        dataSubtotal = document.createElement("td");
+        subtotal = document.createElement("p");
+        
+        subtotal.setAttribute("id", subtotalID);
+        subtotal.textContent = element.quantity * element.unit_price;
+        dataSubtotal.appendChild(subtotal);
         dataAction = document.createElement("td");
         button = document.createElement("button");
         button.textContent = "X";
@@ -100,6 +122,7 @@ class EditSaleController{
         tableRow.appendChild(dataProduct);
         tableRow.appendChild(dataQty);
         tableRow.appendChild(dataPrice);
+        tableRow.appendChild(dataSubtotal);
         tableRow.appendChild(dataAction);
         this.getTableNode().appendChild(tableRow)
       });
