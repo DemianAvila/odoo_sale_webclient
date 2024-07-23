@@ -13,7 +13,7 @@
           <p>Seacrh product</p>
           <input type="text" />
         </div>
-        <table id="data">
+        <table id="data" style="margin-top=2em; margin-bottom=2em">
           <tr>
             <th>Product</th>
             <th>Quantity</th>

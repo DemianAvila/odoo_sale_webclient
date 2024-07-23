@@ -5,6 +5,7 @@ from odoo import http
 from odoo.http import request
 import logging
 import datetime
+import math 
 
 
 class SaleWebclientController(http.Controller):
@@ -91,7 +92,8 @@ class SaleWebclientController(http.Controller):
                 customer_name=".*",
                 order_date_after=".*",
                 order_date_before=".*",
-                maxqueries=5, 
+                maxqueries=5,
+                page=1,
                 **kw):
         string_fields = {
             "sale_id": sale_id,
@@ -121,9 +123,13 @@ class SaleWebclientController(http.Controller):
                     )
 
         sales = request.env["sale.order"].search(filters)
+        #PAGINATION
+        available_pages = math.ceil(len(sales)/maxqueries)
         sale_list = []
         query_count = 0
-        for sale in sales:
+        for index, sale in enumerate(sales):
+            if index < ((int(page)-1)*maxqueries):
+                continue
             processed_keys = {}
             for key in string_fields.keys():  
                 if key == "sale_id":
@@ -142,10 +148,13 @@ class SaleWebclientController(http.Controller):
                             "order_date": sale.date_order.strftime("%d/%m/%y %H:%M:%S")
                         })
                         query_count +=1
+
             if query_count==maxqueries:
-                break
+                break 
+
         return json.dumps({
-            "sales": sale_list
+            "sales": sale_list,
+            "pages": available_pages
         }) 
 
     @http.route('/sale-webclient/edit-sale', 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <template xml:space="preserve">
   <t t-name="sale-webclient.SaleListComponent" owl="1">
-    <div class="container" style="height: 60vh; width: 90vw%; display: flex; flex-direction: column;" >
+    <div class="container" style="min-height: 20rem; width: 90vw; display: flex; flex-direction: column;" >
       <h1>Quotations</h1>
       <div>
         <button class="btn btn-primary rounded">Create +</button>
@@ -17,6 +17,31 @@
           <p style="font-weight: bold;">Quote ID</p>
           <p style="font-weight: bold;">Client</p>
           <p style="font-weight: bold;">Placement date</p>
+        </div>
+      </div>
+      <div id="pagination" style="height: 100%; width: 100%; display: flex; flex-direction: row; ">
+        <div style="width:15%" t-if="state.isPrevPage">
+          <button t-on-click="prevPage" class="btn btn-primary rounded">
+            ←
+          </button>
+        </div>
+        <div style="width:15%">
+          <p class="btn btn-primary rounded">
+            <t t-esc="state.currentPage"/>
+          </p>
+        </div>
+        <div style="width:15%" t-if="state.isNextPage" >
+          <button t-on-click="nextPage" class="btn btn-primary rounded">
+            →
+          </button>
+        </div>
+        <div style="width:15%" t-if="!state.isLastPage" >
+          <p>...</p>
+        </div>
+        <div style="width:15%" t-if="!state.isLastPage" >
+          <button t-on-click="lastPage" class="btn btn-primary rounded">
+            <t t-esc="controller.getAvailablePages()"/>
+          </button>
         </div>
       </div>
     </div>
